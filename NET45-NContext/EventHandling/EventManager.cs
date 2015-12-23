@@ -71,6 +71,12 @@
             }
             else
             {
+                if (_CompositionContainer == null)
+                {
+                    // not configured correctly, do not attempt to raise event
+                    return null;
+                }
+
                 handlerTypes = _EventHandlerCache.GetOrAdd(
                     typeof(TEvent), 
                     _CompositionContainer.GetExportTypesThatImplement<IHandleEvent<TEvent>>()
